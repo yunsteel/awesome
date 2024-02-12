@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
-import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
-import GoalItem from "./components/GoalItem";
-import GoalInput from "./components/GoalInput";
 import { StatusBar } from "expo-status-bar";
+import { useCallback, useState } from "react";
+import { Button, FlatList, StyleSheet, View } from "react-native";
+import GoalInput from "./components/GoalInput";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="inverted" />
       <View style={styles.appContainer}>
         <Button
           title="목표 추가"
