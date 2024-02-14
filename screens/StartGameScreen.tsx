@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 
 interface Props {}
@@ -16,9 +16,13 @@ const StartGameScreen: FC<Props> = () => {
           autoCorrect={false}
         />
       </View>
-      <View>
-        <PrimaryButton>다시하기</PrimaryButton>
-        <PrimaryButton>확인</PrimaryButton>
+      <View style={styles.buttonContainer}>
+        <View style={styles.buttonWrapper}>
+          <PrimaryButton>다시하기</PrimaryButton>
+        </View>
+        <View style={styles.buttonWrapper}>
+          <PrimaryButton>확인</PrimaryButton>
+        </View>
       </View>
     </View>
   );
@@ -28,6 +32,9 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
   container: {
+    marginVertical: 50,
+    marginHorizontal: 30,
+    alignItems: "center",
     backgroundColor: "indigo",
     padding: 32,
     borderRadius: 8,
@@ -53,5 +60,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
+    columnGap: 8,
+  },
+  buttonWrapper: {
+    flex: 1,
   },
 });

@@ -6,17 +6,13 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <View style={styles.container}>
+      <linearGradient colors={["orange"]} style={styles.startGameScreen}>
         <StartGameScreen />
-      </View>
+      </linearGradient>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 50,
-    paddingHorizontal: 30,
-    flex: 1,
-  },
+  startGameScreen: {},
 });
