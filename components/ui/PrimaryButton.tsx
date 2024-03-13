@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
+import { Colors } from "../../constants/colors";
 
 interface Props extends PressableProps {}
 
@@ -17,7 +18,7 @@ const PrimaryButton: FC<PropsWithChildren<Props>> = ({ children, onPress }) => {
           pressed ? [styles.button, styles.pressed] : styles.button
         }
         onPress={onPress}
-        android_ripple={{ color: "lightgray" }}
+        android_ripple={{ color: Colors.yellow300 }}
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     overflow: "hidden",
     borderRadius: 16,
-    backgroundColor: "darkgreen",
+    backgroundColor: Colors.yellow400,
     elevation: 2,
   },
   button: {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   buttonText: {
-    color: "white",
+    color: Colors.purple500,
     textAlign: "center",
   },
   pressed: {

@@ -1,10 +1,13 @@
 import { FC, useState } from "react";
 import { StyleSheet, TextInput, View, Alert } from "react-native";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
+import { Colors } from "../constants/colors";
 
-interface Props {}
+interface Props {
+  onStartGame: (pickedNumber: number) => void;
+}
 
-const StartGameScreen: FC<Props> = () => {
+const StartGameScreen: FC<Props> = ({ onStartGame }) => {
   const [value, setValue] = useState("");
 
   const handleChangeValue = (text: string) => {
@@ -23,6 +26,8 @@ const StartGameScreen: FC<Props> = () => {
       );
       return;
     }
+
+    onStartGame(num);
   };
 
   return (
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
     marginVertical: 50,
     marginHorizontal: 30,
     alignItems: "center",
-    backgroundColor: "indigo",
+    backgroundColor: Colors.purple500,
     padding: 32,
     borderRadius: 8,
     elevation: 8,
@@ -73,9 +78,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 70,
     fontSize: 32,
-    borderBottomColor: "yellow",
+    borderBottomColor: Colors.yellow400,
     borderBottomWidth: 4,
-    color: "yellow",
+    color: Colors.yellow400,
     fontWeight: "bold",
     textAlign: "center",
   },
