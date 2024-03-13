@@ -1,19 +1,40 @@
-import { FC } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { FC, useState } from "react";
+import { StyleSheet, TextInput, View, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 
 interface Props {}
 
 const StartGameScreen: FC<Props> = () => {
+  const [value, setValue] = useState("");
+
+  const handleChangeValue = (text: string) => {
+    setValue(text);
+  };
+
+  const handleSubmit = () => {
+    const num = parseInt(value);
+
+    if (isNaN(num) || num < 0 || num > 99) {
+      // Alert.prompt
+      Alert.alert(
+        "얘! 죽고 싶니?", // title
+        "두 자리 숫자만 입력할 수 있단다.", // message
+        [{ text: "Okay", style: "destructive", onPress: () => setValue("") }] // button
+      );
+      return;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          maxLength={2}
           keyboardType="number-pad"
           autoCapitalize="none"
           autoCorrect={false}
+          value={value}
+          onChangeText={handleChangeValue}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -21,7 +42,7 @@ const StartGameScreen: FC<Props> = () => {
           <PrimaryButton>다시하기</PrimaryButton>
         </View>
         <View style={styles.buttonWrapper}>
-          <PrimaryButton>확인</PrimaryButton>
+          <PrimaryButton onPress={handleSubmit}>확인</PrimaryButton>
         </View>
       </View>
     </View>

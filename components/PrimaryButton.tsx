@@ -9,14 +9,14 @@ import {
 
 interface Props extends PressableProps {}
 
-const PrimaryButton: FC<PropsWithChildren<Props>> = ({ children }) => {
+const PrimaryButton: FC<PropsWithChildren<Props>> = ({ children, onPress }) => {
   return (
     <View style={styles.buttonContainer}>
       <Pressable
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressed] : styles.button
         }
-        onPress={() => console.log("pressed!")}
+        onPress={onPress}
         android_ripple={{ color: "lightgray" }}
       >
         <Text style={styles.buttonText}>{children}</Text>
