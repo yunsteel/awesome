@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { FC, useEffect, useState } from "react";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
 import NumberText from "../components/game/NumberText";
@@ -14,28 +14,50 @@ const generateRandomBetween = (
   if (random === exclude) {
     return generateRandomBetween(min, max, exclude);
   }
+
   return random;
 };
 
 interface Props {
-  userNumber: number;
+  answer: number;
+  onGameOver: () => void;
 }
 
-let minBoundary = 1;
-let maxBoundary = 100;
+let min = 1;
+let max = 100;
 
-const GameScreen: FC<Props> = ({ userNumber }) => {
-  const [guess, setGuess] = useState(
-    generateRandomBetween(minBoundary, maxBoundary, userNumber)
-  );
+const GameScreen: FC<Props> = ({ answer, onGameOver }) => {
+  const [guess, setGuess] = useState(generateRandomBetween(min, max, answer));
+
+  useEffect(() => {
+    if (guess === answer) {
+      onGameOver();
+    }
+  }, [guess, answer]);
 
   const handleNextGuess = (direction: "up" | "down") => {
-    if (direction === "up") {
-      setGuess(generateRandomBetween(guess, maxBoundary, userNumber));
-    } else {
-      maxBoundary = guess - 1;
-      setGuess(generateRandomBetween(minBoundary, guess, userNumber));
+    if (
+      (direction === "down" && guess < answer) ||
+      (direction === "up" && guess > answer)
+    ) {
+      Alert.alert("거짓말!", "넌 이게 잘못됐다는 걸 알 테지.", [
+        { text: "죄송합니다.", style: "destructive" },
+      ]);
+      return;
     }
+
+    if (direction === "up") {
+      min = guess;
+    } else {
+      max = guess - 1;
+    }
+
+    if (min + 1 === answer || max - 1 === answer) {
+      onGameOver();
+      return;
+    }
+
+    setGuess(generateRandomBetween(min, max, answer));
   };
 
   return (

@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
-import { StyleSheet, TextInput, View, Alert } from "react-native";
+import { StyleSheet, TextInput, View, Alert, Text } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { Colors } from "../constants/colors";
+import Title from "../components/ui/Title";
 
 interface Props {
   onStartGame: (pickedNumber: number) => void;
@@ -31,23 +32,27 @@ const StartGameScreen: FC<Props> = ({ onStartGame }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          keyboardType="number-pad"
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={value}
-          onChangeText={handleChangeValue}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <View style={styles.buttonWrapper}>
-          <PrimaryButton>다시하기</PrimaryButton>
+    <View style={styles.root}>
+      <Title>숫자 맞추기</Title>
+      <View style={styles.container}>
+        <Text style={styles.instructionText}>숫자를 입력해라.</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            keyboardType="number-pad"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={value}
+            onChangeText={handleChangeValue}
+          />
         </View>
-        <View style={styles.buttonWrapper}>
-          <PrimaryButton onPress={handleSubmit}>확인</PrimaryButton>
+        <View style={styles.buttonContainer}>
+          <View style={styles.buttonWrapper}>
+            <PrimaryButton>다시하기</PrimaryButton>
+          </View>
+          <View style={styles.buttonWrapper}>
+            <PrimaryButton onPress={handleSubmit}>확인</PrimaryButton>
+          </View>
         </View>
       </View>
     </View>
@@ -57,9 +62,12 @@ const StartGameScreen: FC<Props> = ({ onStartGame }) => {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 50,
+  root: {
+    marginVertical: 100,
     marginHorizontal: 30,
+    rowGap: 20,
+  },
+  container: {
     alignItems: "center",
     backgroundColor: Colors.purple500,
     padding: 32,
@@ -68,7 +76,11 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 2 },
-    rowGap: 32,
+    rowGap: 16,
+  },
+  instructionText: {
+    color: Colors.yellow300,
+    fontSize: 16,
   },
   inputContainer: {
     flexDirection: "row",
